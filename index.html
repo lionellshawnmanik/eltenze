@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eltenze | Luxury Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2d3238 0%, #15181b 100%);
+            --silver-primary: linear-gradient(145deg, #ffffff, #b8bac2);
+            --silver-metallic: linear-gradient(135deg, #f0f1f4 0%, #b8bac2 50%, #93959c 100%);
+            --glass-bg: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --glow: rgba(255, 255, 255, 0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background: var(--bg-gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #ffffff;
+            overflow-x: hidden;
+            padding: 20px;
+        }
+
+        /* Background Decorative Elements for iOS 26 Vibe */
+        .bg-glow {
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%);
+            top: -10%;
+            left: -10%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* iPhone iOS 26 Framework Container */
+        .phone-container {
+            position: relative;
+            width: 100%;
+            max-width: 415px;
+            height: 840px;
+            background: rgba(20, 22, 26, 0.7);
+            border-radius: 50px;
+            box-shadow: 
+                0 0 0 12px #2a2d32, 
+                0 0 0 13px #1d2023,
+                0 30px 60px rgba(0, 0, 0, 0.8),
+                inset 0 0 20px rgba(255,255,255,0.05);
+            backdrop-filter: blur(30px);
+            padding: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            z-index: 1;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+
+        /* iOS 26 Dynamic Island Ultra */
+        .dynamic-island {
+            width: 130px;
+            height: 35px;
+            background: #000000;
+            margin: 0 auto;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .dynamic-island:hover {
+            width: 280px;
+            height: 45px;
+            background: linear-gradient(135deg, #111, #222);
+        }
+
+        .dynamic-island-content {
+            font-size: 11px;
+            color: #a0a5b0;
+            font-weight: 600;
+            letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .dynamic-island:hover .dynamic-island-content {
+            opacity: 1;
+        }
+
+        /* Profile Section */
+        .profile-section {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .avatar-wrapper {
+            position: relative;
+            width: 105px;
+            height: 105px;
+            margin: 0 auto 15px;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            background: var(--silver-metallic);
+            border-radius: 32px; /* iOS Squircle style */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 -4px 10px rgba(0,0,0,0.2);
+            border: 2px solid rgba(255,255,255,0.6);
+        }
+
+        .avatar i {
+            font-size: 42px;
+            color: #1c1e22;
+        }
+
+        .profile-section h1 {
+            font-size: 24px;
+            font-weight: 700;
+            background: var(--silver-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            margin-bottom: 4px;
+        }
+
+        .profile-section p {
+            font-size: 13px;
+            color: #8e929a;
+            font-weight: 400;
+        }
+
+        /* Grid Widgets Layout (iOS 26 Complex Grid) */
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            margin-top: 30px;
+            flex-grow: 1;
+            padding: 15px 0;
+        }
+
+        /* Widget Premium Styling */
+        .widget-link {
+            text-decoration: none;
+            color: white;
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .widget-link::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%;
+            width: 50%; height: 100%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.08), transparent);
+            transform: skewX(-25deg);
+            transition: 0.75s;
+        }
+
+        .widget-link:hover::before {
+            left: 150%;
+        }
+
+        .widget-link:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.07);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3), 0 0 15px var(--glow);
+        }
+
+        .widget-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #d1d4dc;
+            transition: all 0.3s ease;
+        }
+
+        .widget-link:hover .widget-icon {
+            background: var(--silver-metallic);
+            color: #111;
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+
+        .widget-info {
+            margin-top: 30px;
+        }
+
+        .widget-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e2e4e9;
+            margin-bottom: 2px;
+        }
+
+        .widget-username {
+            font-size: 11px;
+            color: #8e929a;
+        }
+
+        /* Special Styling for Crovyz Business Account (Premium Platinum Badge) */
+        .business-widget {
+            grid-column: span 2;
+            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            flex-direction: row;
+            align-items: center;
+            padding: 22px;
+        }
+
+        .business-widget .widget-info {
+            margin-top: 0;
+            margin-left: 15px;
+            flex-grow: 1;
+        }
+
+        .business-badge {
+            background: var(--silver-metallic);
+            color: #111;
+            font-size: 9px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: inline-block;
+            margin-bottom: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .arrow-right {
+            font-size: 16px;
+            color: #8e929a;
+            transition: transform 0.3s ease;
+        }
+
+        .widget-link:hover .arrow-right {
+            transform: translateX(5px);
+            color: #fff;
+        }
+
+        /* iOS Home Bar Indicator at Bottom */
+        .home-bar {
+            width: 140px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.4);
+            margin: 10px auto 0;
+            border-radius: 10px;
+        }
+
+        /* Desktop Container Scaling */
+        @media (max-height: 880px) {
+            .phone-container {
+                height: 92vh;
+                border-radius: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-glow"></div>
+
+    <div class="phone-container">
+        <div class="dynamic-island">
+            <div class="dynamic-island-content">
+                <i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> iOS 26 Luxury Ecosystem
+            </div>
+        </div>
+
+        <div class="profile-section">
+            <div class="avatar-wrapper">
+                <div class="avatar">
+                    <i class="fa-solid fa-crown"></i>
+                </div>
+            </div>
+            <h1>eltenze</h1>
+            <p>Premium Digital Identity</p>
+        </div>
+
+        <div class="links-grid">
+            
+            <a href="https://instagram.com/eltenze" target="_blank" class="widget-link">
+                <div class="widget-icon">
+                    <i class="fa-brands fa-instagram"></i>
+                </div>
+                <div class="widget-info">
+                    <div class="widget-title">Instagram</div>
+                    <div class="widget-username">@eltenze</div>
+                </div>
+            </a>
+
+            <a href="https://tiktok.com/@eltenze" target="_blank" class="widget-link">
+                <div class="widget-icon">
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+                <div class="widget-info">
+                    <div class="widget-title">TikTok</div>
+                    <div class="widget-username">@eltenze</div>
+                </div>
+            </a>
+
+            <a href="https://youtube.com/@eltenze" target="_blank" class="widget-link">
+                <div class="widget-icon">
+                    <i class="fa-brands fa-youtube"></i>
+                </div>
+                <div class="widget-info">
+                    <div class="widget-title">YouTube</div>
+                    <div class="widget-username">@eltenze</div>
+                </div>
+            </a>
+
+            <a href="https://instagram.com/crovyz" target="_blank" class="widget-link business-widget">
+                <div class="widget-icon" style="width: 50px; height: 50px;">
+                    <i class="fa-solid fa-briefcase"></i>
+                </div>
+                <div class="widget-info">
+                    <span class="business-badge">Business</span>
+                    <div class="widget-title" style="font-size: 16px;">Crovyz Studio</div>
+                    <div class="widget-username">@crovyz</div>
+                </div>
+                <div class="arrow-right">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </div>
+            </a>
+
+        </div>
+
+        <div class="home-bar"></div>
+    </div>
+
+</body>
+</html>
